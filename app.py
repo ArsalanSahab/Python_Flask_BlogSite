@@ -25,8 +25,12 @@ app = Flask(__name__) # __name__ , makes it point to the current file
 # @app.route('/home') , uncomment line to redirect both root and /home to index().
 def index():
 
-    return ('Hello World!')
+    return ('<h1>Home Page</h1>')
 
+
+
+
+'''
 # Route to any string user inputs in the URL
 @app.route('/<string:name>')
 def greet(name): # function will get the name argument from the .route and render greet message
@@ -41,6 +45,31 @@ def age_teller(num):
 
 
 
+# Limiting Visitor to Specific HTTP Request Methods
+@app.route('/get', methods=['GET'])
+def get(methods):
+    
+    if (methods == 'GET'):
+
+        return 'Horray GET request successful'
+    return 'You canonly get this page sorry'
+
+@app.route('/post', methods=['POST'])
+def post(methods):
+
+    return 
+
+
+@app.route('/get-post', methods=['GET', 'POST'])
+def get_and_post(methods):
+
+    if (methods == 'GET' or methods == 'POST'):
+
+        return 'GET or POST Sucessful'
+
+    return 'Sorry only GET and POST Allowed'
+
+'''
 
 
 
