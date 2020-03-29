@@ -54,26 +54,6 @@ class BlogPost(db.Model):
         return ('Blog Post {id}'.format(id=self.id))
 
 
-
-#### DUMMY DATA ####
-
-all_posts = [{
-
-        'title':'Post 1',
-        'content':'This is the first Post',
-        'author':'Arsalan'
-
-},{
-
-        'title':'Post 2',
-        'content':'This is the second post'
-
-}]
-
-
-
-
-
 #### Routing #####
 
 @app.route('/') # '/' indicates the root route (lets say homepage)
