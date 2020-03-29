@@ -27,6 +27,19 @@ def index():
 
     return ('Hello World!')
 
+# Route to any string user inputs in the URL
+@app.route('/<string:name>')
+def greet(name): # function will get the name argument from the .route and render greet message
+
+    return ("Greetings {user_name}".format(user_name=name))
+
+# Age teller
+@app.route('/<int:num>')
+def age_teller(num):
+
+    return ("Your age is : {age}".format(age=num))
+
+
 
 
 
