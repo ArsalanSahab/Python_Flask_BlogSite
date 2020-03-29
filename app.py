@@ -33,12 +33,13 @@ app = Flask(__name__) # __name__ , makes it point to the current file
 
 # DATABASE CONFIGURATION
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' # /// : Relative Path | //// : Abs Path
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db' # /// : Relative Path | //// : Abs Path
 db = SQLAlchemy(app)
 
 
 # DATABASE DESIGNING
 
+# Each Table is a Class Instance in the DATABASE
 class BlogPost(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
