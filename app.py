@@ -7,17 +7,45 @@ Notes :
                 export FLASK_ENV=development
 
                 now run the code using : flask run
+
+
+2. Flask by default reads .html files from the `templates` folder
+
+3. to render html templates , import the render_template function .
+
+4. To dynamically manipulate html content 'Jinja2' is used as a built in language.
+
 '''
 
 
 
 
 #### IMPORTS ####
-from flask import Flask
+from flask import Flask, render_template
 
 
 # CREATE INSTANCE OF FLASK 
 app = Flask(__name__) # __name__ , makes it point to the current file
+
+
+#### DUMMY DATA ####
+
+all_posts = [{
+
+        'title':'Post 1',
+        'content':'This is the first Post',
+        'author':'Arsalan'
+
+},{
+
+        'title':'Post 2',
+        'content':'This is the second post'
+
+}]
+
+
+
+
 
 #### Routing #####
 
@@ -25,7 +53,13 @@ app = Flask(__name__) # __name__ , makes it point to the current file
 # @app.route('/home') , uncomment line to redirect both root and /home to index().
 def index():
 
-    return ('<h1>Home Page</h1>')
+    return (render_template('index.html'))
+
+
+@app.route('/posts')
+def posts():
+
+    return render_template('posts.html', posts=all_posts)
 
 
 
