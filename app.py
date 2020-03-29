@@ -22,10 +22,36 @@ Notes :
 
 #### IMPORTS ####
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
 
 
 # CREATE INSTANCE OF FLASK 
 app = Flask(__name__) # __name__ , makes it point to the current file
+
+
+# DATABASE CONFIGURATION
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' # /// : Relative Path | //// : Abs Path
+db = SQLAlchemy(app)
+
+
+# DATABASE DESIGNING
+
+class BlogPost(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    author = db.Column(db.String(20), nullable=False, default= 'N/A')
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+    def __repr__(self):
+
+        return ('Blog Post {id}'.format(id=self.id))
+
 
 
 #### DUMMY DATA ####
