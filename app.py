@@ -21,7 +21,7 @@ Notes :
 
 
 #### IMPORTS ####
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -35,6 +35,11 @@ app = Flask(__name__) # __name__ , makes it point to the current file
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db' # /// : Relative Path | //// : Abs Path
 db = SQLAlchemy(app)
+
+
+
+
+all_posts = [{},{},{}]
 
 
 # DATABASE DESIGNING
@@ -66,7 +71,24 @@ def index():
 @app.route('/posts', methods=['GET', 'POST'])
 def posts():
 
-    return render_template('posts.html', posts=all_posts)
+
+    # Check if method is POST
+    if (request.method == 'POST'):
+
+        post_title = request.form['title']
+        post_content = request.form['content']
+        # Create new BlogPost instance
+        new_post = BlogPost(title=post_title, content=post_content, author='Arsalan')
+        # Add to current Session
+        db.session.add(new_post)
+        # Commit to DATABASE
+        db.session.commit()
+        return redirect('/posts')
+
+    else :
+
+        all_posts = BlogPost.query.order_by(BlogPost.date_posted).all()
+        return render_template('posts.html', posts=all_posts)
 
 
 
