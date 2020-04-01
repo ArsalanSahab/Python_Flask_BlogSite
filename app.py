@@ -100,6 +100,26 @@ def delete_post(id):
     return redirect('/posts')
 
 
+@app.route('/posts/edit/<int:id>',methods=['GET', 'POST'])
+def edit_post(id):
+
+    post_to_edit = BlogPost.query.get_or_404(id)
+
+    if (request.method == 'POST'):
+
+        
+        post_to_edit.title = request.form['title']
+        post_to_edit.author = request.form['author']
+        post_to_edit.content = request.form['content']
+        db.session.commit()
+
+        return redirect('/posts')
+
+    else :
+
+        return render_template('edit_post.html', post= post_to_edit)
+
+
 '''
 # Route to any string user inputs in the URL
 @app.route('/<string:name>')
