@@ -1,64 +1,35 @@
 {% extends 'base.html' %}
 
-
-
 {% block head %}
-
-    <title>Posts</title>
-
+<title>Posts</title> 
 {% endblock %}
 
-
-
 {% block body %}
-
 <br>
-    <h1>All Posts</h1>
-
-<br>
-
-
+<div>
+    <h1 style="display:inline">All Posts</h1>
+    <a style="display:inline" class="btn btn-success float-right" href="/posts/new" >+ New Post</a>
+</div>
     <hr>
-    <h2>Create New Post:</h2>
-    <form action='/posts' method='POST'>
-    Title : <input type='text' name='title' id='title'>
-    <br>
-    Author Name : <input type='text' name='author' id='author'>
-    <br>
-    Post : <input type='text' name='content' id='content'>
-    <br>
-    <input type='submit' value='Post'>
-    </form>
-
-    <hr>
-
 
     {% for post in posts %}
-
-        <h2>{{post.title}}</h2>
-
+        <h2>{{ post.title }}</h2>
         {% if post.author %}
-
-            <small>Author : {{post.author}} </small>
-            <br>
-
+            <small> Post By : {{ post.author }}</small>
         {% else %}
-
-            <h3>Author Details Unavailable</h3>
-
+            <small> Posted by Anonymous</small>
         {% endif %}
-
-        <p>{{post.content}}</p>
-
-        <small>Date Posted : {{post.date_posted}}</small>
         <br>
-        <a class='btn btn-danger' href='/posts/delete/{{post.id}}'>Delete</a>
-        <a class='btn btn-primary' href='/posts/edit/{{post.id}}'>Edit</a>
-
-        
+        <br>
+        <p style="white-space:pre-wrap">{{ post.content }}</p>
+        <br>
+        <small> Date Posted : {{ post.date_posted }}</small>
+        <br>
+        <a class="btn btn-danger" href='/posts/delete/{{post.id}}'>Delete</a>
+        <a class="btn btn-primary" href='/posts/edit/{{post.id}}'>Edit</a>
+        <br>
         <hr>
-
-
-    {% endfor %}
+        <br>
+    {% endfor%}
 
 {% endblock %}

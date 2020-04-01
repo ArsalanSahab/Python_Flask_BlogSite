@@ -2,33 +2,28 @@
 
 {% block head %}
 
-    <title>Posts</title>
+<title>Edit Post</title> 
 
 {% endblock %}
 
-
-
 {% block body %}
+<hr>
 
-<br>
-    <h1>Editing Post</h1>
-<br>
-
-
+<h1>Editing Post</h1>
 
     <hr>
-    <h2>Edit Post :</h2>
-    <br>
+    <h2>Edit:</h2>
     <form action='/posts/edit/{{post.id}}' method='POST'>
-    Title : <input type='text' name='title' id='title' value='{{post.title}}'>
-    <br>
-    Author Name : <input type='text' name='author' id='author' value='{{post.author}}'>
-    <br>
-    Post : <input type='text' name='content' id='content' value='{{post.content}}'>
-    <br>
-    <input type='submit' value='Save'>
+        <label for="title">Title:</label>
+        <input class="form-control" type="text" name='title' id='title' value="{{ post.title }}" aria-label="Enter Title">
+        <br>
+        <label for="author">Author:</label>
+        <input class="form-control" type="text" name='author' id='author' value="{{ post.author }}" aria-label="Enter Author">
+        <br>
+        <label for="content">Post:</label>
+        <textarea class="form-control" name='content' id="content" aria-label="Enter Content" rows="3">{{ post.content }}</textarea>
+        <br>
+        <input type='submit' value='Save'>
     </form>
-
     <hr>
-
 {% endblock %}
