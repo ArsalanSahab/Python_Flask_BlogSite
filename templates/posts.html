@@ -12,9 +12,10 @@
 
 {% block body %}
 
+<br>
     <h1>All Posts</h1>
 
-
+<br>
 
 
     <hr>
@@ -38,7 +39,8 @@
 
         {% if post.author %}
 
-            <h3>Post By : {{post.author}} </h3>
+            <small>Author : {{post.author}} </small>
+            <br>
 
         {% else %}
 
@@ -47,8 +49,13 @@
         {% endif %}
 
         <p>{{post.content}}</p>
-        <a href='/posts/delete/{{post.id}}'>Delete</a>
-        <a href='/posts/edit/{{post.id}}'>Edit</a>
+
+        <small>Date Posted : {{post.date_posted}}</small>
+        <br>
+        <a class='btn btn-danger' href='/posts/delete/{{post.id}}'>Delete</a>
+        <a class='btn btn-primary' href='/posts/edit/{{post.id}}'>Edit</a>
+
+        
         <hr>
 
 

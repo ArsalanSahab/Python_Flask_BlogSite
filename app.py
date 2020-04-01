@@ -15,6 +15,13 @@ Notes :
 
 4. To dynamically manipulate html content 'Jinja2' is used as a built in language.
 
+5. Jinja 2 Variable Format : {{variable here}}.
+
+6. Jinja2 Block Format :  {% block your_block_name %} Content {% endblock %}
+
+7. Jinja2 Loops Format :  {% for ___ in ____ %} Content {% endfor %}
+
+8. Jinja2 Conditional Statement Format : {% if ______ %} Content {% else %} Content {% endif %}
 '''
 
 
