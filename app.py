@@ -37,11 +37,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db' # /// : Relative Pat
 db = SQLAlchemy(app)
 
 
-
-
-all_posts = [{},{},{}]
-
-
 # DATABASE DESIGNING
 
 # Each Table is a Class Instance in the DATABASE
@@ -77,12 +72,14 @@ def posts():
 
         post_title = request.form['title']
         post_content = request.form['content']
+        post_author = request.form['author']
         # Create new BlogPost instance
-        new_post = BlogPost(title=post_title, content=post_content, author='Arsalan')
+        new_post = BlogPost(title=post_title, content=post_content, author=post_author)
         # Add to current Session
         db.session.add(new_post)
         # Commit to DATABASE
         db.session.commit()
+
         return redirect('/posts')
 
     else :
@@ -91,6 +88,16 @@ def posts():
         return render_template('posts.html', posts=all_posts)
 
 
+@app.route('/posts/delete/<int:id>')
+def delete_post(id):
+
+    # Get the Post to delete from Datbase
+    post_to_delete = BlogPost.query.get_or_404(id)
+    # Delete and commit
+    db.session.delete(post_to_delete)
+    db.session.commit()
+
+    return redirect('/posts')
 
 
 '''
